@@ -1,5 +1,7 @@
 from general.debug import log, logline
 
+from provider_base import ProviderBase
+
 class BuilderCreator():
     def __init__(self):
         self.creator = {}
@@ -28,17 +30,3 @@ class BuilderCreator():
 
         log('resolve:kwargs', kwargs)
         return creator().create(*args, **kwargs) 
-
-class ProviderBase():
-    def get_kwarg(self, name, **kwargs):
-        if name in kwargs:
-            return kwargs[name]
-        return ''
-
-    def get_arg(self, name, *args):
-        if len(args) > 0:
-            return args[0]
-        return ''
-
-    def execute(self, required_parameter, *args):
-        raise NotImplementedError('execute is not implemented')

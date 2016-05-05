@@ -1,4 +1,4 @@
-from general.debug import log, logline
+from general.debug import log, logline, kwlog
 
 from builder_creator import BuilderCreator, ProviderBase
 
@@ -18,7 +18,7 @@ class MockProvider(ProviderBase, MockProviderBase):
 
         return "{}mock provider".format(param)
 
-class AlternativeMockProvider(ProviderBase, MockProviderBase):
+class MockAlternativeProvider(ProviderBase, MockProviderBase):
     def __init__(self, **kwargs):
         self.keyword_arguments = kwargs
 
@@ -34,7 +34,8 @@ class MockProviderBuilder():
         self.provider_type = type(MockProviderBase)
 
     def create(self, *args, **kwargs):
-        log('create:kwargs', kwargs)
+        kwlog(**kwargs)
+
         hint = None
         if len(args) > 0:
             hint = args[0].lower() 
@@ -54,7 +55,7 @@ class MockProviderBuilder():
         if name == "mock":
             provider = MockProvider() 
         elif name == "alt":
-            provider = AlternativeMockProvider(**kwargs) 
+            provider = MockAlternativeProvider(**kwargs) 
         elif name == "bad":
             provider = BadMockProvider()
         else:
