@@ -15,5 +15,14 @@ My code using it SHOULD. NOT. CARE. ABOUT. MONGO. All I do is:
 
     some_provider = builder_creator.resolve(IAristotleProvider)
 
+
+Also note that the resolver also accepts *args and **kwargs for extra
+flexibility:
+
+    provider = builder_creator.resolve(IAristotleProvider, "alternateConnectionString", collection="log") 
+
 Despite what random bloggers say, service locators are awesome and provide
 excellent decoupling.
+
+Anyway, my explanation is lame.
+
