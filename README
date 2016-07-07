@@ -24,5 +24,5 @@ flexibility:
 Despite what random bloggers say, service locators are awesome and provide
 excellent decoupling.
 
-Anyway, my explanation is lame.
+Anyway, my explanation is lame. Just look at the unit test.
 
