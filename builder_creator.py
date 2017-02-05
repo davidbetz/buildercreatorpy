@@ -1,5 +1,3 @@
-from general.debug import log, logline
-
 from provider_base import ProviderBase
 
 class BuilderCreator():
@@ -28,5 +26,4 @@ class BuilderCreator():
         if creator is None:
             return None
 
-        log('resolve:kwargs', kwargs)
         return creator().create(*args, **kwargs) 

@@ -1,5 +1,3 @@
-from general.debug import log, logline, kwlog
-
 from builder_creator import BuilderCreator, ProviderBase
 
 class MockProviderBase():
@@ -34,8 +32,6 @@ class MockProviderBuilder():
         self.provider_type = type(MockProviderBase)
 
     def create(self, *args, **kwargs):
-        kwlog(**kwargs)
-
         hint = None
         if len(args) > 0:
             hint = args[0].lower() 
