@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/davidbetz/buildercreatorpy.svg?branch=master)](https://travis-ci.org/davidbetz/buildercreatorpy)
+
 See test_provider.py unit test for usage.
 
 Basically an implementation of an abstract factory pattern.
