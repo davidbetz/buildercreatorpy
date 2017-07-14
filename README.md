@@ -1,3 +1,7 @@
+# Builder Creator for Python
+
+Copyright (c) 2016 David Betz
+
 [![Build Status](https://travis-ci.org/davidbetz/buildercreatorpy.svg?branch=master)](https://travis-ci.org/davidbetz/buildercreatorpy)
 
 See test_provider.py unit test for usage.
