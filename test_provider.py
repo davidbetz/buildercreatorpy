@@ -1,8 +1,8 @@
 import unittest
 
-from abstract_factory import AbstractFactory
+from .abstract_factory import AbstractFactory
 
-from mock import MockProviderFactory, MockProvider
+from .mock import MockProviderFactory, MockProvider
 
 class TestAbstractFactory(unittest.TestCase):
     def test_bad(self):
