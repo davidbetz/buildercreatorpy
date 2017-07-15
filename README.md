@@ -3,6 +3,7 @@
 Copyright (c) 2016-2017 David Betz
 
 [![Build Status](https://travis-ci.org/davidbetz/pyabstractfactory.svg?branch=master)](https://travis-ci.org/davidbetz/pyabstractfactory)
+[![PyPI version](https://badge.fury.io/py/abstractfactory.svg)](https://badge.fury.io/py/abstractfactory)
 
 See test_provider.py unit test for usage.
 
