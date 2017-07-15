@@ -1,4 +1,4 @@
-from .provider import Provider
+from provider import Provider
 
 class AbstractFactory():
     def __init__(self):
