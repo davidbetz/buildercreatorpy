@@ -16,7 +16,7 @@ class BuilderCreator():
         self.creator.remove(creator)
 
     def resolve(self, provider, *args, **kwargs):
-        provider_type = type(ProviderBase)
+        provider_type = type(provider)
 
         if provider_type not in self.creator:
             return None
