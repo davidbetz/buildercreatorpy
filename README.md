@@ -1,34 +1,38 @@
-# Builder Creator for Python
+# Abstract Factory for Python
 
-Copyright (c) 2016 David Betz
+Copyright (c) 2016-2017 David Betz
 
-[![Build Status](https://travis-ci.org/davidbetz/buildercreatorpy.svg?branch=master)](https://travis-ci.org/davidbetz/buildercreatorpy)
+[![Build Status](https://travis-ci.org/davidbetz/pyabstractfactory.svg?branch=master)](https://travis-ci.org/davidbetz/pyabstractfactory)
 
 See test_provider.py unit test for usage.
 
 Basically an implementation of an abstract factory pattern.
 
-In one system where I use this, I create "Builder Creators" for each
-type of thing in my system. So, SearchBuilderCreator, CloudStorageBuilderCreator,
-QueueBuilderCreator, AristotleBuilderCreator, etc... These would implement
-for ID interface like ICloudStorageProvider (in Python, it's just a class).
+In one system where I use this, I create factories for eachs type of thing in my system. So, SearchFactory, CloudStorageFactory, QueueFactory, AristotleFactory, etc... These would implement for ID interface like ICloudStorageProvider (in Node, it's just a class).
 
-Each of these would have their own switch/case (or whatever) to create
-the builder for it. So, for example, I may have config in a YAML file
-specifying that I want to use Mongo for my Aristotle provider (
-I'm never going to call it "NoSQL"; it's aristotelian!) Yet, I don't care.
-My code using it SHOULD. NOT. CARE. ABOUT. MONGO. All I do is:
+Each of these would have their own switch/case (or whatever) to create the factory for it. So, for example, I may have config in a YAML file specifying that I want to use Mongo for my Aristotle provider ("Aristotle" is what most people incorrectly call "NoSQL").
 
-    some_provider = builder_creator.resolve(IAristotleProvider)
+To begin, create the factory (do this one for the entirety of your system):
 
+    abstractFactory = AbstractFactory()
 
-Also note that the resolver also accepts *args and **kwargs for extra
-flexibility:
+Then, add your factories:
 
-    provider = builder_creator.resolve(IAristotleProvider, "alternateConnectionString", collection="log") 
+        abstractFactory.set(SearchFactory)
+        abstractFactory.set(CloudStorageFactory)
+        abstractFactory.set(QueueFactory)
+        abstractFactory.set(AristotleFactory)
 
-Despite what random bloggers say, service locators are awesome and provide
-excellent decoupling.
+When the time comes, just ask for your provider:
 
-Anyway, my explanation is lame. Just look at the unit test.
+    provider = abstractFactory.resolve(IAristotleProvider)
 
+Your code SHOULD. NOT. CARE. ABOUT. MONGO. It should the your configuration or something handle that. Don't tightly couple your providers.
+
+Also note that the resolver also accepts various arguments for extra flexibility:
+
+    provider = abstractFactory.resolve(IAristotleProvider, "alternateConnectionString", collection="log") 
+
+Despite what random bloggers say, service locators are awesome and provide excellent decoupling.
+
+Look at the `Mock` examples provided with the tests; they're rather extensive.

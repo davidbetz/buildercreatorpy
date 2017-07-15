@@ -1,14 +1,14 @@
-from builder_creator import BuilderCreator, ProviderBase
+from abstract_factory import AbstractFactory, Provider
 
-class MockProviderBase():
+class MockProvider():
     def execute(self, *args, **kwargs):
         raise NotImplementedError('execute is not implemented')
 
-class BadMockProvider(ProviderBase, MockProviderBase):
+class BadMockProvider(Provider, MockProvider):
     def execute_spelled_wrong(self, *args, **kwargs):
         pass
 
-class MockProvider(ProviderBase, MockProviderBase):
+class CoreMockProvider(Provider, MockProvider):
     def execute(self, *args, **kwargs):
         param = ''
         if len(args) > 0:
@@ -16,7 +16,7 @@ class MockProvider(ProviderBase, MockProviderBase):
 
         return "{}mock provider".format(param)
 
-class MockAlternativeProvider(ProviderBase, MockProviderBase):
+class MockAlternativeProvider(Provider, MockProvider):
     def __init__(self, **kwargs):
         self.keyword_arguments = kwargs
 
@@ -27,9 +27,9 @@ class MockAlternativeProvider(ProviderBase, MockProviderBase):
         result =  "{}{}alternative mock provider{}".format(arg, taco, burrito)
         return result
 
-class MockProviderBuilder():
+class MockProviderFactory():
     def __init__(self):
-        self.provider_type = type(MockProviderBase)
+        self.interface_type = type(MockProvider)
 
     def create(self, *args, **kwargs):
         hint = None
@@ -49,7 +49,7 @@ class MockProviderBuilder():
             return None 
 
         if name == "mock":
-            provider = MockProvider() 
+            provider = CoreMockProvider() 
         elif name == "alt":
             provider = MockAlternativeProvider(**kwargs) 
         elif name == "bad":

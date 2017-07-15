@@ -1,14 +1,14 @@
 import unittest
 
-from builder_creator import BuilderCreator
+from abstract_factory import AbstractFactory
 
-from mock import MockProviderBuilder, MockProviderBase
+from mock import MockProviderFactory, MockProvider
 
-class TestBuilderCreator(unittest.TestCase):
+class TestAbstractFactory(unittest.TestCase):
     def test_bad(self):
-        builder_creator = BuilderCreator()
-        builder_creator.set(MockProviderBuilder)
-        provider = builder_creator.resolve(MockProviderBase, "bad") 
+        abstractFactory = AbstractFactory()
+        abstractFactory.set(MockProviderFactory)
+        provider = abstractFactory.resolve(MockProvider, "bad") 
         try:
             result = provider.execute("nope")
         except NotImplementedError:
@@ -17,59 +17,59 @@ class TestBuilderCreator(unittest.TestCase):
             self.fail('NotImplementedError not raised')
 
     def test_does_not_exist(self):
-        builder_creator = BuilderCreator()
-        builder_creator.set(MockProviderBuilder)
+        abstractFactory = AbstractFactory()
+        abstractFactory.set(MockProviderFactory)
         try:
-            provider = builder_creator.resolve(MockProviderBase, "does not exist") 
+            provider = abstractFactory.resolve(MockProvider, "does not exist") 
         except ValueError:
             pass
         else:
             self.fail('ValueError not raised')
 
     def test_execute_no_parameter(self):
-        builder_creator = BuilderCreator()
-        builder_creator.set(MockProviderBuilder)
-        provider = builder_creator.resolve(MockProviderBase) 
+        abstractFactory = AbstractFactory()
+        abstractFactory.set(MockProviderFactory)
+        provider = abstractFactory.resolve(MockProvider) 
         result = provider.execute() 
 
         self.assertEqual(result, "mock provider") 
 
     def test_execute_with_parameter(self):
-        builder_creator = BuilderCreator()
-        builder_creator.set(MockProviderBuilder)
-        provider = builder_creator.resolve(MockProviderBase) 
+        abstractFactory = AbstractFactory()
+        abstractFactory.set(MockProviderFactory)
+        provider = abstractFactory.resolve(MockProvider) 
         result = provider.execute("hello") 
 
         self.assertEqual(result, "hellomock provider") 
 
     def test_with_override_without_parameter(self):
-        builder_creator = BuilderCreator()
-        builder_creator.set(MockProviderBuilder)
-        provider = builder_creator.resolve(MockProviderBase, "alt") 
+        abstractFactory = AbstractFactory()
+        abstractFactory.set(MockProviderFactory)
+        provider = abstractFactory.resolve(MockProvider, "alt") 
         result = provider.execute() 
 
         self.assertEqual(result, "alternative mock provider") 
 
     def test_with_override_and_parameter(self):
-        builder_creator = BuilderCreator()
-        builder_creator.set(MockProviderBuilder)
-        provider = builder_creator.resolve(MockProviderBase, "alt") 
+        abstractFactory = AbstractFactory()
+        abstractFactory.set(MockProviderFactory)
+        provider = abstractFactory.resolve(MockProvider, "alt") 
         result = provider.execute("hi") 
 
         self.assertEqual(result, "hialternative mock provider") 
 
     def test_with_override_and_kwargs(self):
-        builder_creator = BuilderCreator()
-        builder_creator.set(MockProviderBuilder)
-        provider = builder_creator.resolve(MockProviderBase, "alt", taco="keyword param") 
+        abstractFactory = AbstractFactory()
+        abstractFactory.set(MockProviderFactory)
+        provider = abstractFactory.resolve(MockProvider, "alt", taco="keyword param") 
         result = provider.execute("hi")
         
         self.assertEqual(result, "hikeyword paramalternative mock provider") 
 
     def test_with_override_and_kwargs_and_paramkwargs(self):
-        builder_creator = BuilderCreator()
-        builder_creator.set(MockProviderBuilder)
-        provider = builder_creator.resolve(MockProviderBase, "alt", taco="keyword param") 
+        abstractFactory = AbstractFactory()
+        abstractFactory.set(MockProviderFactory)
+        provider = abstractFactory.resolve(MockProvider, "alt", taco="keyword param") 
         result = provider.execute("hi", burrito="parameter keyword param") 
 
         self.assertEqual(result, "hikeyword paramalternative mock providerparameter keyword param") 

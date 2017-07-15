@@ -1,4 +1,4 @@
-class ProviderBase():
+class Provider():
     def get_kwarg(self, name, **kwargs):
         if name in kwargs:
             return kwargs[name]
