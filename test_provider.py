@@ -63,6 +63,8 @@ class TestBuilderCreator(unittest.TestCase):
         builder_creator.set(MockProviderBuilder)
         provider = builder_creator.resolve(MockProviderBase, "alt", taco="keyword param") 
         result = provider.execute("hi")
+        
+        self.assertEqual(result, "hikeyword paramalternative mock provider") 
 
     def test_with_override_and_kwargs_and_paramkwargs(self):
         builder_creator = BuilderCreator()
