@@ -1,4 +1,4 @@
-from abstract_factory import AbstractFactory, Provider
+from .abstract_factory import AbstractFactory, Provider
 
 class MockProvider():
     def execute(self, *args, **kwargs):
