@@ -1,8 +1,14 @@
 import unittest
 
-from abstract_factory import AbstractFactory
+try:
+    from abstract_factory import AbstractFactory
+except:
+    from .abstract_factory import AbstractFactory
 
-from mock import MockProviderFactory, MockProvider
+try:
+    from mock import MockProviderFactory, MockProvider
+except:
+    from .mock import MockProviderFactory, MockProvider
 
 class TestAbstractFactory(unittest.TestCase):
     def test_bad(self):
