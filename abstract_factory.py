@@ -1,4 +1,7 @@
-from provider import Provider
+try:
+    from provider import Provider
+except:
+    from .provider import Provider
 
 class AbstractFactory():
     def __init__(self):
